@@ -1,0 +1,21 @@
+{
+  "name": "eurobertics/connfetti-redis",
+  "description": "A model based Redis connection library.",
+  "type": "library",
+  "require": {
+    "php": "^7.0",
+    "ext-redis": "*"
+  },
+  "autoload": {
+    "psr-4" : {
+      "Connfetti\\Redis\\" : "src/"
+    }
+  },
+  "license":      "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name":  "Bernd Robertz",
+      "email": "brobertz.net@gmail.com"
+    }
+  ]
+}
