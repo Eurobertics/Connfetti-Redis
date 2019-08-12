@@ -49,7 +49,7 @@ class Redis extends \Redis
         $retstate_ar = array();
         $data = $hashmodel->getAsArray();
         if($resethash) {
-            $this->del($hashmodel);
+            $this->del($hashmodel->getHashname());
         }
         foreach($data as $hkey => $hvalue) {
             $retstate_ar[] = $this->hSet($hashmodel->getHashname(), $hkey, $hvalue);
