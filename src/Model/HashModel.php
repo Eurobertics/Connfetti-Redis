@@ -39,7 +39,7 @@ class HashModel
 
     public function __get($name)
     {
-        if(key_exists($name, $this->hashdata[$name])) {
+        if(key_exists($name, $this->hashdata)) {
             return $this->hashdata[$name];
         }
         return null;
@@ -52,7 +52,7 @@ class HashModel
 
     public function __unset($name)
     {
-        if(key_exists($name, $this->hashdata[$name])) {
+        if(key_exists($name, $this->hashdata)) {
             unset($this->hashdata[$name]);
             $this->hashcount--;
         }
