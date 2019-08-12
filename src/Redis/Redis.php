@@ -2,10 +2,13 @@
 
 namespace Connfetti\Redis\Redis;
 
+use Connfetti\Redis\Exception\DriverException;
 use Connfetti\Redis\Model\HashModel;
 
 class Redis extends \Redis
 {
+    public static $VERSION = '0.2.0';
+
     private $config = array('host' => 'localhost', 'port' => 6379, 'timeout' => 0, 'reserved' => null, 'retry_interval' => '', 'read_timeout' => '');
 
     public function __construct(array $config, string $password = '')
@@ -18,14 +21,18 @@ class Redis extends \Redis
         if(isset($config['retry_interval'])) { $this->config['retry_interval'] = $config['read_timeout']; }
         if(isset($config['read_timeout'])) { $this->config['read_timeout'] = $config['read_timeout']; }
 
-        $this->connect(
-            $this->config['host'],
-            $this->config['port'],
-            $this->config['timeout'],
-            $this->config['reserved'],
-            $this->config['retry_interval'],
-            $this->config['read_timeout']
+        try {
+            $this->connect(
+                $this->config['host'],
+                $this->config['port'],
+                $this->config['timeout'],
+                $this->config['reserved'],
+                $this->config['retry_interval'],
+                $this->config['read_timeout']
             );
+        } catch(DriverException $e) {
+            throw $e;
+        }
 
         if(strlen($password) > 0) {
             $this->auth($password);
