@@ -22,7 +22,7 @@ class Redis extends \Redis
         if(isset($config['read_timeout'])) { $this->config['read_timeout'] = $config['read_timeout']; }
 
         try {
-            $this->connect(
+            @$this->connect(
                 $this->config['host'],
                 $this->config['port'],
                 $this->config['timeout'],
