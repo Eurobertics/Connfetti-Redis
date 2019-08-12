@@ -2,7 +2,7 @@
 namespace Connfetti\Redis\Exception;
 
 
-class DriverException extends \Exception implements ExcpetionInterface
+class DriverException extends \Exception implements ExceptionInterface
 {
     public function __construct($message, $code = 0, $previous = null)
     {

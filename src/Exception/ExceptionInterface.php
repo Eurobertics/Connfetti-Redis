@@ -2,7 +2,7 @@
 namespace Connfetti\Redis\Exception;
 
 
-interface ExcpetionInterface
+interface ExceptionInterface
 {
     public function prettyOutputFormat();
     public function getError();
