@@ -2,6 +2,8 @@
 
 namespace Connfetti\Redis\Redis;
 
+use Connfetti\Redis\Model\HashModel;
+
 class Redis extends \Redis
 {
     private $config = array('host' => 'localhost', 'port' => 6379, 'timeout' => 0, 'reserved' => null, 'retry_interval' => '', 'read_timeout' => '');
@@ -33,5 +35,22 @@ class Redis extends \Redis
     public function __destruct()
     {
         $this->close();
+    }
+
+    public function setHashByModel(HashModel $hashmodel)
+    {
+        $retstate_ar = array();
+        $data = $hashmodel->getAsArray();
+        foreach($data as $hkey => $hvalue) {
+            $retstate_ar[] = $this->hSet($hashmodel->getHashname(), $hkey, $hvalue);
+        }
+        return $retstate_ar;
+    }
+
+    public function getHashByName(string $hashname)
+    {
+        $hashmodel = new HashModel($hashname);
+        $hashmodel->populateByArray($this->hGetAll($hashname));
+        return $hashmodel;
     }
 }
