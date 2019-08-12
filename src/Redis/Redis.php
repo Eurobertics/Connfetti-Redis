@@ -9,7 +9,7 @@ class Redis extends \Redis
 {
     public static $VERSION = '0.2.0';
 
-    private $config = array('host' => 'localhost', 'port' => 6379, 'timeout' => 0, 'reserved' => null, 'retry_interval' => '', 'read_timeout' => '');
+    private $config = array('host' => 'localhost', 'port' => 6379, 'timeout' => 0, 'reserved' => null, 'retry_interval' => 0, 'read_timeout' => 0.0);
 
     public function __construct(array $config, string $password = '')
     {
@@ -30,8 +30,8 @@ class Redis extends \Redis
                 $this->config['retry_interval'],
                 $this->config['read_timeout']
             );
-        } catch(DriverException $e) {
-            throw $e;
+        } catch(\RedisException $e) {
+            throw new DriverException($e->getMessage(), $e->getCode(), $e->getPrevious());
         }
 
         if(strlen($password) > 0) {

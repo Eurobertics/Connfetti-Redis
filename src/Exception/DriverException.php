@@ -21,6 +21,7 @@ class DriverException extends \Exception implements ExcpetionInterface
     public function getError()
     {
         $error = "Error occourred in query:".$this->prettyOutputFormat();
+        $error .= "Errorcode: ".$this->getCode().$this->prettyOutputFormat();
         $error .= "Message: ".$this->getMessage().$this->prettyOutputFormat();
         $error .= "File: ".$this->getFile().$this->prettyOutputFormat();
         $error .= "Line: ".$this->getLine().$this->prettyOutputFormat();
@@ -30,6 +31,7 @@ class DriverException extends \Exception implements ExcpetionInterface
     public function getErrorTrace()
     {
         $error = "Error occourred in query:".$this->prettyOutputFormat();
+        $error .= "Errorcode: ".$this->getCode().$this->prettyOutputFormat();
         $error .= "Message: ".$this->getMessage().$this->prettyOutputFormat();
         $error .= "Stacktrace: ".$this->prettyOutputFormat().str_replace("\n", $this->prettyOutputFormat(), $this->getTraceAsString());
         return $error;
