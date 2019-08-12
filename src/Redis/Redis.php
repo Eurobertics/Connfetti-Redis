@@ -44,10 +44,13 @@ class Redis extends \Redis
         $this->close();
     }
 
-    public function setHashByModel(HashModel $hashmodel)
+    public function setHashByModel(HashModel $hashmodel, bool $resethash = true)
     {
         $retstate_ar = array();
         $data = $hashmodel->getAsArray();
+        if($resethash) {
+            $this->del($hashmodel);
+        }
         foreach($data as $hkey => $hvalue) {
             $retstate_ar[] = $this->hSet($hashmodel->getHashname(), $hkey, $hvalue);
         }
