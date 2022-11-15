@@ -7,7 +7,7 @@ use Connfetti\Redis\Model\HashModel;
 
 class Redis extends \Redis
 {
-    public static $VERSION = '0.2.1';
+    public static $VERSION = '0.2.2';
 
     private $config = array('host' => 'localhost', 'port' => 6379, 'timeout' => 0, 'reserved' => null, 'retry_interval' => 0, 'read_timeout' => 0.0);
 
